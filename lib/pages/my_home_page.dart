@@ -1,7 +1,9 @@
+import 'package:book_flutter_app/pages/my_tabs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:book_flutter_app/res/app_colors.dart' as AppColors;
 import 'dart:convert';
+
 class MyHomePage extends StatefulWidget{
   const MyHomePage({Key? key}) : super(key: key);
 
@@ -110,17 +112,20 @@ ReadData () async{
                     return [
                       SliverAppBar(
                         pinned: true,
-                        bottom: PreferredSize(preferredSize: Size.fromHeight(50),
+                        backgroundColor: AppColors.sliverBackground,
+                        bottom: PreferredSize(
+                          preferredSize: Size.fromHeight(50),
                          child: Container(
-                          margin: const EdgeInsets.all(0),
+                          margin: const EdgeInsets.only(bottom: 20, left: 10),
                           child: TabBar(
                             indicatorPadding: const EdgeInsets.all(0),
                             indicatorSize: TabBarIndicatorSize.label,
-                            labelPadding: const EdgeInsets.all(0),
+                            labelPadding: const EdgeInsets.only(right: 10),
                             controller: _tabController,
                             isScrollable: true,
                             indicator: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10),
+                             
                               boxShadow: [
                                 BoxShadow(
                                    color: Colors.grey.withOpacity(0.2),
@@ -130,66 +135,9 @@ ReadData () async{
                               ]
                             ),
                             tabs: [
-                              Container(
-                                width: 120,
-                                height: 50,
-                                child: Text(
-                                'New',
-                                style: TextStyle(
-                                  color: Colors.white
-                                  ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.2),
-                                          blurRadius: 7,
-                                          offset: Offset(0, 0),
-                                        )
-                                    ],
-                                  ),
-                              ),
-                              Container(
-                                width: 120,
-                                height: 50,
-                                child: Text(
-                                'New',
-                                style: TextStyle(
-                                  color: Colors.white
-                                  ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.2),
-                                          blurRadius: 7,
-                                          offset: Offset(0, 0),
-                                        )
-                                    ],
-                                  ),
-                              ),
-                              Container(
-                                width: 120,
-                                height: 50,
-                                child: Text(
-                                'New',
-                                style: TextStyle(
-                                  color: Colors.white
-                                  ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.2),
-                                          blurRadius: 7,
-                                          offset: Offset(0, 0),
-                                        )
-                                    ],
-                                  ),
-                              )
+                              Apptabs(color: AppColors.menu1Color, text: 'New'),
+                              Apptabs(color: AppColors.menu2Color, text: 'Popular'),
+                              Apptabs(color: AppColors.menu3Color, text: 'Trending'),
                             ],
                           ),
                          )
