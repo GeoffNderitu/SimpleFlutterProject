@@ -14,12 +14,18 @@ class MyHomePage extends StatefulWidget{
 class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin{
 
 late List popularBooks;
+late List vitabu;
 late TabController _tabController;
 late ScrollController _scrollController;
 ReadData () async{
   await DefaultAssetBundle.of(context).loadString('../json/pop_books.json').then((s){
     setState(() {
       popularBooks = json.decode(s);
+    });
+  });
+  await DefaultAssetBundle.of(context).loadString('../json/vitabu.json').then((s){
+    setState(() {
+      vitabu = json.decode(s);
     });
   });
 }
@@ -148,6 +154,95 @@ ReadData () async{
                   body: TabBarView(
                     controller: _tabController,
                     children: [
+                      ListView.builder(
+                        itemCount: vitabu==null?0:vitabu.length,
+                        itemBuilder: (_,i){
+                        return Container(
+                          margin: const EdgeInsets.only(
+                          left: 20, 
+                          right: 20, 
+                          top: 10, 
+                          bottom: 10),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: AppColors.tabVarViewColor,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 2,
+                                  offset: Offset(0, 0),
+                                  color: Colors.grey.withOpacity(0.2),
+                                )
+                              ]
+                            ),
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              child: Row(
+                                children: 
+                              [
+                                Container(
+                                  width: 90,
+                                  height: 120,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                      image: AssetImage(vitabu[i] ["img"]),
+                                      )
+                                  ),
+                              ),
+                              SizedBox(width: 10,), 
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                    Icon(Icons.star, size: 16, color: AppColors.starColor),
+                                    Text(vitabu[i]["rating"], style:
+                                    TextStyle(
+                                      color: AppColors.menu2Color
+                                    ),
+                                  ),
+
+                                  ],
+                                  ),
+                                Text(vitabu[i]["title"],
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: "Avenir",
+                                  fontWeight: FontWeight.bold
+                                ),
+                                ),
+                                Text(vitabu[i]["text"],
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: "Avenir",
+                                  color: AppColors.subTitleText
+                                ),
+                                ),
+                                Container(
+                                  width: 60,
+                                  height: 20,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: AppColors.loveColor, 
+                                  ),
+                                  child:   Text("Love",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontFamily: "Avenir",
+                                  color: Colors.white
+                                ),
+                                ),
+                                alignment: Alignment.center,
+                                )
+                                ],
+                              )
+                              ],
+                              ),
+                            )
+                          ),
+                        );
+                      }),
                     Material(
                       child: ListTile(
                         leading: CircleAvatar(
